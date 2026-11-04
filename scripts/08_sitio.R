@@ -154,7 +154,8 @@ for (LANG in c("en", "sv")) {
              dir_ciu, sprintf("%s.md", s))
   }
   # paginas de ciudades que ya no estan (por si cambia la lista)
-  viejas <- setdiff(sub("\\.md$", "", list.files(file.path(DOCS, dir_ciu), "\\.md$")), c("index", r$fichas$slug))
-  unlink(file.path(DOCS, dir_ciu, paste0(viejas, ".md")))
+  carpeta <- do.call(file.path, as.list(c(DOCS, dir_ciu)))
+  viejas <- setdiff(sub("\\.md$", "", list.files(carpeta, "\\.md$")), c("index", r$fichas$slug))
+  unlink(file.path(carpeta, paste0(viejas, ".md")))
   cat(sprintf("Sitio (%s) escrito en %s: %d ciudades\n", LANG, DOCS, r$n))
 }
